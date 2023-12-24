@@ -1,44 +1,41 @@
-﻿/* Code project 1 - write code that validates integer input
-Here are the conditions that your first coding project must implement:
+﻿/*Here are the rules for the battle game that you need to implement in your code project:
 
-. Your solution must include either a do-while or while iteration.
-
-. Before the iteration block: your solution must use a Console.WriteLine() statement to prompt the user for an integer value between 5 and 10.
-
-. Inside the iteration block:
-    Your solution must use a Console.ReadLine() statement to obtain input from the user.
-    Your solution must ensure that the input is a valid representation of an integer.
-    If the integer value isn't between 5 and 10, your code must use a Console.WriteLine() statement to prompt the user for an integer value between 5 and 10.
-    Your solution must ensure that the integer value is between 5 and 10 before exiting the iteration.
-    
-. Below (after) the iteration code block: your solution must use a Console.WriteLine() statement to inform the user that their input value has been accepted.*/
+    . You must use either the do-while statement or the while statement as an outer game loop.
+    . The hero and the monster will start with 10 health points.
+    . All attacks will be a value between 1 and 10.
+    . The hero will attack first.
+    . Print the amount of health the monster lost and their remaining health.
+    . If the monster's health is greater than 0, it can attack the hero.
+    . Print the amount of health the hero lost and their remaining health.
+    . Continue this sequence of attacking until either the monster's health or hero's health is zero or less.
+    . Print the winner. */
 
 
+Random randomNumber = new Random();
+int heroHealth = 10;
+int monsterHealth = 10;
+string turn = "";
 
-
-Console.WriteLine("Please input a integer value between 5 and 10.");
-string? input;
-int finalNumber = 0;
-bool? validNumber;
-do{
-    int inputNumber = 0;
-    input = Console.ReadLine();
-    validNumber = int.TryParse(input, out inputNumber);
-
-    if(validNumber == true)
+while( heroHealth > 0 && monsterHealth > 0 )
+{
+    int attack = randomNumber.Next(0,10);
+    if( turn == "monster" )
     {
-        if(inputNumber<5||inputNumber>10)
+        heroHealth -= attack;
+        if(heroHealth>0)
         {
-            Console.WriteLine($"You entered {inputNumber}. Please enter a number between 5 and 10.");
-            continue;
-        }else{
-            finalNumber = inputNumber;
+            turn = "hero";
         }
-    }else{
-        Console.WriteLine("Sorry, you entered an invalid number, please try again");
-        continue;
-    }                   
+        Console.WriteLine($"Hero was damaged and lost {attack} health and now has {heroHealth} health.");
+    }else
+    {
+        monsterHealth -= attack;
+        if(monsterHealth>0)
+        {
+            turn = "monster";
+        }
+        Console.WriteLine($"Monster was damaged and lost {attack} health and now has {monsterHealth} health.");
+    }
+};
 
-}while(finalNumber==0);
-
-Console.WriteLine($"Your input value ({finalNumber}) has been accepted.");
+Console.WriteLine($"{turn} wins!");
