@@ -19,16 +19,17 @@
 
 string[] myStrings = new string[2] { "I like pizza. I like roast chicken. I like salad", "I like all three of the menu choices" };
 int periodLocation = -1;
+string myString;
 
 foreach(string i in myStrings)
 {
-    string myString = i;
+    myString = i;
     periodLocation = i.IndexOf(".");
     do{
         if(periodLocation>-1)
         {
-            Console.WriteLine(myString.Substring(0,periodLocation).TrimStart());
-            myString = myString.Substring(periodLocation+2);
+            Console.WriteLine(myString.Remove(periodLocation));
+            myString = myString.Substring(periodLocation+1).TrimStart();
             periodLocation = myString.IndexOf(".");
         }else{
             Console.WriteLine(myString);
@@ -37,7 +38,7 @@ foreach(string i in myStrings)
 
     }while(myString != "");
 }
-
+//-------------------------------------------- Example Below --------------------------------------------
 // int[] myArray = new int[2] {3,5};
 
 // foreach(int i in myArray)
@@ -55,4 +56,3 @@ foreach(string i in myStrings)
 //     }while(myNumber!=0);
 
 // }
-
