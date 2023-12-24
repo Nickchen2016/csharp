@@ -1,35 +1,58 @@
-﻿/* Here are the conditions that your second coding project must implement:
+﻿/* Here are the conditions that your third coding project must implement:
 
-    . Your solution must include either a do-while or while iteration.
+    . your solution must use the following string array to represent the input to your coding logic: (Line 20)
 
-    . Before the iteration block: your solution must use a Console.WriteLine() statement to prompt the user for one of three role names: Administrator, Manager, or User.
+    . Your solution must declare an integer variable named periodLocation that can be used to hold the location of the period character within a string.
 
-    . Inside the iteration block:
+    . Your solution must include an outer foreach or for loop that can be used to process each string element in the array. The string variable that you'll process inside the loops should be named myString.
 
-        Your solution must use a Console.ReadLine() statement to obtain input from the user.
-        Your solution must ensure that the value entered matches one of the three role options.
-        Your solution should use the Trim() method on the input value to ignore leading and trailing space characters.
-        Your solution should use the ToLower() method on the input value to ignore case.
-        If the value entered isn't a match for one of the role options, your code must use a Console.WriteLine() statement to prompt the user for a valid entry.
-    . Below (after) the iteration code block: Your solution must use a Console.WriteLine() statement to inform the user that their input value has been accepted. */
+    . In the outer loop, your solution must use the IndexOf() method of the String class to get the location of the first period character in the myString variable. The method call should be similar to: myString.IndexOf("."). If there's no period character in the string, a value of -1 will be returned.
 
-Console.WriteLine("Enter your role name (Administrator, Manager, or User)");
-string? input;
-string[] roles = {"Administrator", "Manager", "User"};
-string inputValue = "";
+    . Your solution must include an inner do-while or while loop that can be used to process the myString variable.
 
-while(inputValue == "")
+    . In the inner loop, your solution must extract and display (write to the console) each sentence that is contained in each of the strings that are processed.
+
+    . In the inner loop, your solution must not display the period character.
+
+    . In the inner loop, your solution must use the Remove(), Substring(), and TrimStart() methods to process the string information. */
+
+
+string[] myStrings = new string[2] { "I like pizza. I like roast chicken. I like salad", "I like all three of the menu choices" };
+int periodLocation = -1;
+
+foreach(string i in myStrings)
 {
-    input = Console.ReadLine();
-    input = input.Trim().Substring(0,1).ToUpper()+input.Trim().Substring(1).ToLower();
-    
-    if(roles.Any(input.Contains))
-    {
-        inputValue = input;
-    }else{
-        Console.WriteLine($"The role name that you entered, '{input}' is not valid. Enter your role name (Administrator, Manager, or User)");
-        continue;
-    }
+    string myString = i;
+    periodLocation = i.IndexOf(".");
+    do{
+        if(periodLocation>-1)
+        {
+            Console.WriteLine(myString.Substring(0,periodLocation).TrimStart());
+            myString = myString.Substring(periodLocation+2);
+            periodLocation = myString.IndexOf(".");
+        }else{
+            Console.WriteLine(myString);
+            myString = "";
+        }
+
+    }while(myString != "");
 }
 
-Console.WriteLine($"Your input value ({inputValue}) has been accepted.");
+// int[] myArray = new int[2] {3,5};
+
+// foreach(int i in myArray)
+// {
+// int myNumber = i;
+//     do
+//     {
+//         if(myNumber>1){
+//             Console.WriteLine($"Here is my number > 1: {myNumber}");
+//             myNumber--;
+//         }else{
+//             Console.WriteLine($"Here is my number < 1: {myNumber}");
+//             myNumber--;
+//         }
+//     }while(myNumber!=0);
+
+// }
+
